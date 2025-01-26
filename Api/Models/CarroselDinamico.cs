@@ -26,6 +26,7 @@ public class CarroselDinamico
                             uri = dados.owner.avatar_url
                         }
                     }
+
                  });
 
         // foreach(GithubInfos info in infosGithub)
@@ -51,12 +52,18 @@ public class CarroselDinamico
 public class Item
 {
     public Header header { get; set; }
+    public Option option{ get; set; }
 }
 
 public class Header
 {
     public string type { get; set; }
     public DadosCarossel value { get; set; }
+}
+
+public class Option
+{
+    
 }
 
 public class DadosCarossel
