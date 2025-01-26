@@ -5,29 +5,25 @@ namespace Api.Models;
 
 public class CarroselDinamico
 {
-    public string itemType { get { return "application/vnd.lime.document-select+json";}}
-    public IEnumerable<Item> items { get; set; }
+    public string itemType { get { return "application/vnd.lime.collection+json"; } }
+    public Content content { get; set; }
 
     public CarroselDinamico(IEnumerable<GithubInfos> infosGithub)
     {
-        items = new List<Item>();
+        content = new Content();
 
-        items = (from dados in infosGithub
-                 select new Item()
-                 {
-                    header = new Header()
-                    {
-                        type = "application/vnd.lime.media-link+json",
-                        value = new DadosCarossel()
+        content.items = (from dados in infosGithub
+                        select new Header()
                         {
-                            title = dados.name,
-                            text = dados.description,
-                            type = "image/png",
-                            uri = dados.owner.avatar_url
-                        }
-                    }
-
-                 });
+                            type = "application/vnd.lime.media-link+json",
+                            value = new DadosCarossel()
+                            {
+                                title = dados.name,
+                                text = dados.description,
+                                type = "image/png",
+                                uri = dados.owner.avatar_url
+                            }
+                        });
 
         // foreach(GithubInfos info in infosGithub)
         // {
@@ -49,21 +45,17 @@ public class CarroselDinamico
     }
 }
 
-public class Item
+public class Content
 {
-    public Header header { get; set; }
-    public Option option{ get; set; }
+    public string itemType { get { return "application/vnd.lime.document-select+json"; } }
+    public IEnumerable<Header> items { get; set; }
+
 }
 
 public class Header
 {
     public string type { get; set; }
     public DadosCarossel value { get; set; }
-}
-
-public class Option
-{
-    
 }
 
 public class DadosCarossel
