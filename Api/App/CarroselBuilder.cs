@@ -13,10 +13,10 @@ namespace Api.App
     {
         const string urlGitHub = "https://api.github.com/search/repositories?q=takenet+in:name+language:csharp&order:asc";
 
-        public CarroselDinamico ConstruirNovoCarrosel()
+        public CarroselDinamico ConstruirNovoCarrosel(string tokenGithub)
         {
             var gitHubFinder = new GitHubFinder();
-            var json = gitHubFinder.BuscarInfos(urlGitHub);
+            var json = gitHubFinder.BuscarInfos(urlGitHub, tokenGithub);
 
             if(json is null) throw new Exception();
             

@@ -16,13 +16,14 @@ namespace Teste_Blip.Controllers
     [Route("api/[controller]")]
     public class GithubController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet()]
+
+        public IActionResult Get([FromHeader]string tokenGithub)
         {
             try
             {
                 CarroselBuilder builder = new CarroselBuilder();
-                return Ok(builder.ConstruirNovoCarrosel());
+                return Ok(builder.ConstruirNovoCarrosel(tokenGithub));
             }
             catch (Exception ex)
             {
